@@ -7,7 +7,7 @@ export default async (req, res) => {
     process.env.NEXT_EXAMPLE_CMS_DATOCMS_PREVIEW_SECRET;
 
   // Check the secret and next parameters
-  if (secret && req.query.secret !== secret) {
+  if (!secret || typeof req.query.secret !== 'string' || req.query.secret !== secret) {
     return res.status(401).json({ message: "Invalid token" });
   }
 
